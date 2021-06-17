@@ -4,6 +4,7 @@ exports.checkAccountPayload = (req, res, next) => {
   // DO YOUR MAGIC
   const {name,budget} = req.body
   if(name && budget){
+    
     next()
   }
   else if(!name || !budget){
@@ -41,13 +42,18 @@ exports.checkAccountNameUnique = (req, res, next) => {
 
 exports.checkAccountId = (req, res, next) => {
   // DO YOUR MAGIC
-  const account = Account.getById(req.params.id)
-  if(account){
-    req.account = account
-    next()
-  }
-  else{
-    res.status(404).json({message: 'Account not found'})
-  }
-
+  Account.getById(req.params.id)
+  .then(account =>{
+    if(account){
+      req.account = account
+      next()
+    }
+    else{
+      res.status(404).json("account not found")
+    }
+  })
+  .catch(error =>{
+    next(error)
+  })
+  
 }

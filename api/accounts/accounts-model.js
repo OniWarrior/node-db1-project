@@ -21,11 +21,12 @@ const create = account => {
 
 }
 
-const updateById = (id, account) => {
+const updateById = (id, {name,budget}) => {
   // DO YOUR MAGIC
+  console.log(name,budget)
   return db('accounts')
          .where('id',id)
-         .update(account)
+         .update({name,budget})
          .then(()=>{
            return getById(id)
          })
