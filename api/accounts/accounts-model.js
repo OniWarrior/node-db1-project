@@ -12,12 +12,11 @@ const getAll = () => {
          .first()
 }
 
-const create = account => {
+const create = ({name,budget}) => {
   // DO YOUR MAGIC
-  db('accounts').insert(account)
-  .then(([id])=>{
-    return getById(id)
-  })
+  return db('accounts')
+    .insert({name,budget})
+    .then(([id]) => getById(id));
 
 }
 

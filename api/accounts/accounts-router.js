@@ -22,8 +22,16 @@ router.get('/:id',checkAccountId, (req, res, next) => {
   res.status(200).json(req.account)
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', checkAccountPayload,checkAccountNameUnique,(req, res, next) => {
   // DO YOUR MAGIC
+  
+  Account.create(req.body)
+  .then(newAccount =>{
+    res.status(201).json(newAccount)
+  })
+  .catch(error=>{
+    next(error)
+  })
 })
 
 router.put('/:id',checkAccountId,checkAccountPayload,checkAccountNameUnique, (req, res, next) => {
