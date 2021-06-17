@@ -14,6 +14,7 @@ const getAll = () => {
 
 const create = ({name,budget}) => {
   // DO YOUR MAGIC
+  
   return db('accounts')
     .insert({name,budget})
     .then(([id]) => getById(id));
@@ -22,7 +23,7 @@ const create = ({name,budget}) => {
 
 const updateById = (id, {name,budget}) => {
   // DO YOUR MAGIC
-  console.log(name,budget)
+  
   return db('accounts')
          .where('id',id)
          .update({name,budget})
